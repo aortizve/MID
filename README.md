@@ -2,7 +2,7 @@
 MC simulations for MID
   -----------
 
- This example shows a simple implelemtation of the MID geometry in Geant4, an iron absorber (passive volume) is considered, this is followed by two layers of muon chambers. This geometry is intended for very basic studies like: acceptance, impact of magnetic field in the detector efficiency, ...
+ This example shows a simple implementation of the MID geometry in Geant4, an iron absorber (passive volume) is considered, this is followed by two layers of muon chambers. This geometry is intended for very basic studies like: acceptance, impact of magnetic field in the detector efficiency, ...
 
  1- GEOMETRY DEFINITION
 
