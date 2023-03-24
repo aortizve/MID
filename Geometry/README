@@ -1,0 +1,74 @@
+Compile the program
+
+mkdir main_build
+cd main_build
+cmake -DGeant4_DIR=/Users/aortizve/software/geant4/geant4.10.07-install/lib/Geant4-10.7.3/  ../../Geometry
+make install
+
+How to run
+./midGeom muon.mac
+
+
+  -----------
+
+ This example shows a simple implelemtation of the MID geometry in Geant4, an iron absorber (passive volume) is considered, this is followed by two layers of muon chambers. This geometry is intended for very basic studies like: acceptance, impact of magnetic field in the detector efficiency, ... 
+
+ 1- GEOMETRY DEFINITION
+
+     The geometry is constructed in the DetectorConstruction class.
+     The setup consists of a passive absorber (Fe) followed by two concentric
+     muon chambers (plastic scintillator). An inner chamber is considered
+     to have the kinematic information of the muon before entering in the absorber
+
+     In addition, a global, uniform,  magnetic field can be
+     applied using G4GlobalMagFieldMessenger, instantiated in
+     DetectorConstruction::ConstructSDandField with a non zero field value,
+     or via interactive commands.
+     For example:
+
+     /globalField/setValue 0 0 2. tesla
+
+ 2- PHYSICS LIST
+
+     The particle's type and the physic processes which will be available
+     in this example are set in the FTFP_BERT physics list. This physics list
+     requires data files for electromagnetic and hadronic processes.
+     See more on installation of the datasets in Geant4 Installation Guide,
+     Chapter 3.3: Note On Geant4 Datasets:
+     http://geant4.web.cern.ch/geant4/UserDocumentation/UsersGuides/InstallationGuide/html/ch03s03.html
+     The following datasets: G4LEDATA, G4LEVELGAMMADATA, G4SAIDXSDATA and
+     G4ENSDFSTATEDATA are mandatory for this example.
+
+     In addition, the build-in interactive command:
+                 /process/(in)activate processName
+     allows the user to activate/inactivate the processes one by one.
+
+ 3- ACTION INITALIZATION
+
+   A newly introduced class, ActionInitialization,
+   instantiates and registers to Geant4 kernel all user action classes.
+
+   While in sequential mode the action classes are instatiated just once,
+   via invoking the method:
+      ActionInitialization::Build()
+   in multi-threading mode the same method is invoked for each thread worker
+   and so all user action classes are defined thread-local.
+
+   A run action class is instantiated both thread-local
+   and global that's why its instance has is created also in the method
+      ActionInitialization::BuildForMaster()
+   which is invoked only in multi-threading mode.
+
+ 4- PRIMARY GENERATOR
+
+     The primary generator action class employs the G4ParticleGun.
+     The primary kinematics consists of a single particle which starts at the world centre
+     and hits the absorber and chambers. The type of the particle
+     and its energy can be changed via the G4 built-in commands of
+     the G4ParticleGun class.
+
+     For the time being particles follow an uniform distribution in pseudorapidity
+
+
+
+

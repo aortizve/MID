@@ -1,0 +1,24 @@
+# Macro file for example B2
+# 
+# Can be run in batch, without graphic
+# or interactively: Idle> /control/execute run1.mac
+#
+# Change the default number of workers (in multi-threading mode) 
+#/run/numberOfThreads 4
+#
+# Initialize kernel
+/run/initialize
+# 
+# set a magnetic field and max allowed step length
+# 3 event with printing hits
+#
+/tracking/verbose 0
+/globalField/verbose 2
+/globalField/setValue 0 0 2. tesla
+#/B2/det/stepMax 1.0 mm
+#/gun/particle J/psi
+/gun/particle mu-
+/gun/energy 1.5 GeV
+/run/beamOn 10
+#
+
